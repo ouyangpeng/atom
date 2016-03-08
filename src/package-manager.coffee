@@ -130,6 +130,8 @@ class PackageManager
   #
   # Return a {String} file path to apm.
   getApmPath: ->
+    configPath = atom.config.get('core.apmPath')
+    return configPath if configPath
     return @apmPath if @apmPath?
 
     commandName = 'apm'
