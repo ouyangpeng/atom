@@ -229,6 +229,10 @@ class AtomEnvironment extends Model
 
     checkPortableHomeWritable()
 
+    # Patch the `process.env` on startup to fix the problem first documented
+    # in #4126
+    process.env = @project.getEnv()
+
   attachSaveStateListeners: ->
     debouncedSaveState = _.debounce((=> @saveState()), @saveStateDebounceInterval)
     @document.addEventListener('mousedown', debouncedSaveState, true)
